@@ -1,0 +1,20 @@
+{
+  "name": "gkkupload",
+  "version": "1.0.0",
+  "description": "上传插件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guokeke/gkkupload.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guokeke/gkkupload/issues"
+  },
+  "homepage": "https://github.com/guokeke/gkkupload#readme"
+}

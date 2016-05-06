@@ -1,0 +1,213 @@
+.gkk-upload-outter{
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-color: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #d4d4d4;
+  z-index: 1;
+}
+
+.gkk-upload-form{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+  z-index: 10;
+}
+
+.hide{
+  display: none !important;
+}
+
+.gkk-upload-form-text{
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -150px;
+  z-index: 11;
+  color: #9E9E9E;
+}
+
+.gkk-upload-form-p1{
+  cursor: default;
+}
+
+.gkk-upload-form-p2{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.gkk-upload-form-p2:hover{
+  cursor: pointer;
+  color: #00B8D4;
+}
+
+.gkk-button{
+  padding: 10px;
+  text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 20;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+  background-color: #fafafa;
+}
+
+.gkk-upload-button{
+  position: absolute;
+  bottom: 10px;
+  left: 38%;
+  margin-left: -26px;
+  box-shadow: 0px 0px 3px #00B8D4;
+  color: #00B8D4;
+}
+
+.gkk-upload-button:hover{
+  background-color: #00B8D4;
+  color: #fafafa;
+}
+
+.gkk-upload-cancle-button{
+  position: absolute;
+  bottom: 10px;
+  left: 62%;
+  margin-left: -26px;
+  box-shadow: 0px 0px 3px #f44336;
+  color: #f44336;
+}
+
+.gkk-upload-cancle-button:hover{
+  background-color: #f44336;
+  color: #fafafa;
+}
+
+.gkk-upload-form-form-over{
+  z-index: 100;
+}
+
+.gkk-upload-form-over{
+  background-color: #f1f1f1;
+}
+
+.gkk-upload-file-info-box{
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.gkk-upload-file-list{
+  position: relative;
+  font-size: 12px;
+}
+
+.gkk-upload-file-line{
+  position: relative;
+  margin-bottom:10px;
+  text-indent: 20px;
+  height: 48px;
+  color: #5A5A5A;
+  transition-duration: 250ms;
+  transition-timing-function: ease-in-out;
+}
+
+.gkk-upload-file-progress{
+  background: transparent;
+}
+
+.gkk-upload-file-progress-value{
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  background-color: #81C784;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #81c784;
+  opacity: .5;
+}
+.gkk-upload-file-progress-value-number{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  top: 10px;
+}
+
+.cover{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/*动画效果*/
+/*.file-upload-success{
+
+}
+
+.file-upload-fail{
+
+}*/
+
+.file-upload-success-prgress-value-number{
+  font-size: 15px;
+  top: 20px;
+  color: #009688;
+}
+
+.file-upload-fail-progress-value-number{
+  font-size: 12px;
+  top: 20px;
+  color: #d50000;
+}
+
+.gkk-return-button{
+  position: absolute;
+  bottom: 20px;
+  height: auto;
+  border: 1px solid #9E9E9E;
+  color: #9E9E9E;
+  left: 50%;
+  margin-left: -27px;
+}
+
+.gkk-return-button:hover{
+  border: 1px solid #616161;
+  color: #616161;
+}
+
+.gkk-popup{
+  position: absolute;
+  min-width: 250px;
+  max-width: 400px;
+  min-height: 300px;
+  right: -320px;
+  top: -65px;
+  display: inline-block;
+}
+
+.gkk-popup-item{
+  position: relative;
+  box-shadow: 0px 0px 5px #ccc;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
+}
+.gkk-popup-item-err{
+  color: #757575;
+  font-size: 12px;
+}
+.gkk-popup-item-file-name{
+  color: #d32f2f;
+  font-size: 15px;
+}
