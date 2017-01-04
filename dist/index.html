@@ -13,10 +13,21 @@
         margin-left: -300px;
       }
     </style>
+
+    <link rel="stylesheet" href="./demo.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
+
     <div class="container">
       <div id="gkkupload"></div>
     </div>
-  </body>
+
+    <script src="./index.js"></script>
+    <script>
+      var ele = document.getElementById('gkkupload');
+      var upload = new GkkUpload(ele,{
+        UPLOAD_URL:'/upload'
+      });
+    </script>
+  <script type="text/javascript" src="index.4969938cd782a1f57f89.js"></script></body>
 </html>

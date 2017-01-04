@@ -1,3 +1,5 @@
+require('./style.css');
+
 (function(func){
   'use scrit'
 
@@ -11,6 +13,13 @@
 
   if(!window.GkkUpload) {
     window.GkkUpload = func();
+  }
+
+  if(process.env.NODE_ENV === 'development') {
+    var ele = document.getElementById('gkkupload');
+    var upload = new GkkUpload(ele,{
+      UPLOAD_URL:'/upload'
+    });
   }
 
 })(function(){
@@ -898,8 +907,9 @@
       return this;
     },
 
-    selectFileHandler:function(e){
-      triggerEvent(this.input,'click');
+    selectFileHandler:function(){
+      // triggerEvent(this.input,'click');
+      this.input.click();
     },
 
     bindInputChange:function(){

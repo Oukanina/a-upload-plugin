@@ -4,17 +4,29 @@
   "description": "上传插件",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server"
+  },
+  "bin": {
+    "webpack-dev-server": "node_modules/.bin/webpack-dev-server"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/guokeke/gkkupload.git"
+    "url": "git+https://github.com/guokeke/gkkupload.git",
+    "type": "git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "gkk <guo.ke.ke.a@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/guokeke/gkkupload/issues"
   },
-  "homepage": "https://github.com/guokeke/gkkupload#readme"
+  "homepage": "https://github.com/guokeke/gkkupload#readme",
+  "dependencies": {
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.26.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  }
 }
