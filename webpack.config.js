@@ -11,7 +11,7 @@ module.exports = {
     },
 
     output: {
-        filename: '[name].[hash].js',
+        filename: '[name].js',
         path: 'dist'
     },
 
@@ -26,8 +26,8 @@ module.exports = {
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        // new webpack.optimize.CommonsChunkPlugin(),
-        new ExtractTextWebpackPlgin('[name].[hash].css'),
+        new webpack.optimize.UglifyJsPlugin(),
+        new ExtractTextWebpackPlgin('[name].css'),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(env)
         }),

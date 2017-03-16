@@ -15,6 +15,7 @@ require('./style.css');
     window.GkkUpload = func();
   }
 
+  // development!!!
   if(process.env.NODE_ENV === 'development') {
     var ele = document.getElementById('gkkupload');
     var upload = new GkkUpload(ele,{
@@ -123,23 +124,21 @@ require('./style.css');
     @param options 传入功能选项
     @return 组件对象
   */
-  function GkkUpload(element,options) {
-
-    return GkkUpload.prototype.init(element,options);
+  function GkkUpload(element, options) {
+    return GkkUpload.prototype.init(element, options);
   }
 
   function isFunction(o) {
-    return typeof function(){} === typeof o;
+    return (typeof function(){} === typeof o);
   }
 
   function isString(o) {
-    return typeof '1' === typeof o;
+    return (typeof '1' === typeof o);
   }
 
   // http://stackoverflow.com/questions/4767709/checking-if-object-is-a-dom-element
   function isDOMElement(o) {
-    // return typeof o === typeof document.documentElement;
-    return o instanceof Element;
+    return (o instanceof Element);
   }
 
   // http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
@@ -178,6 +177,7 @@ require('./style.css');
     }
     ele.setAttribute('class',_class.join(' '));
   }
+
   /*
   * @dec: 移除class
   * @param:ele:domElement 需要移除class的元素
@@ -186,7 +186,8 @@ require('./style.css');
   function rmClass(ele,clas) {
     var
     _class = ele.getAttribute('class'),
-    _c = clas.split(' ')
+    _c = clas.split(' ');
+
     // 属性为空直接返回
     if(!_c) return;
     if(!_class) return;
@@ -217,9 +218,10 @@ require('./style.css');
   function getFileExtension(filename) {
     return (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename)[0] : undefined;
   }
+
   // 显示文件大小
   function fileSizeTrans(size) {
-    if(size > 1000 * 1000) {
+    if(parseInt(size) > 1000 * 1000) {
       return parseInt(size/(1000 * 1000) * 10)/10 +' MB';
     } else if(size > 1000) {
       return parseInt(size/(1000) * 10) /10 +' KB';
@@ -240,8 +242,9 @@ require('./style.css');
       throw new Error(ERROR.SELECT_ELEMENT_ERROR);
     }
   }
+
   // http://www.html5rocks.com/en/tutorials/cors/
-  function createCORSRequest(method,url,async) {
+  function createCORSRequest(method, url, async) {
     var xhr = new XMLHttpRequest();
      if ("withCredentials" in xhr) {
        // XHR for Chrome/Firefox/Opera/Safari.
@@ -273,6 +276,7 @@ require('./style.css');
   }
 
   GkkUpload.prototype = {
+
     init:function(element,options){
       // 获取容器元素
       if(isDOMElement(element)) {
@@ -289,11 +293,11 @@ require('./style.css');
       if(options === undefined) {
         this.options = DEFAULT_OPTIONS;
       } else {
-        for (var proto in DEFAULT_OPTIONS) {
-          if (options.hasOwnProperty(proto)) {
-            this.options[proto] = options[proto];
+        for (var p in DEFAULT_OPTIONS) {
+          if (options.hasOwnProperty(p)) {
+            this.options[p] = options[p];
           }  else {
-            this.options[proto] = DEFAULT_OPTIONS[proto];
+            this.options[p] = DEFAULT_OPTIONS[p];
           }
         }
       }
@@ -347,6 +351,7 @@ require('./style.css');
 
       return this;
     },
+
     // 将更节点放入容器
     render:function(){
       this.container.appendChild(this.root);
@@ -355,8 +360,8 @@ require('./style.css');
 
     // 绑定器
     // http://stackoverflow.com/questions/9462605/how-to-bind-event-to-element
-    on:function(element,type,handler){
-      var _on = function(element,type,handler) {
+    on:function(element, type, handler){
+      var _on = function(element, type, handler) {
         if(element.addEventListener) {
           element.addEventListener(type,handler,false);
         } else if(element.attachEvent) {
@@ -373,11 +378,13 @@ require('./style.css');
 
       return this;
     },
+
     // 构建根节点
     setupRoot:function(){
       this.root = cDiv({class:this.options.GKK_UPLOAD_CLASS});
       return this;
     },
+
     // 构建表单
     setupForm:function(){
       var
@@ -403,9 +410,8 @@ require('./style.css');
       p1.appendChild(t1);
       p2.appendChild(t2);
       // 如果允许拖拽则显示提示
-      if(this.options.ALLOW_DRAG) {
-        text.appendChild(p1);
-      }
+      if(this.options.ALLOW_DRAG) text.appendChild(p1);
+
       text.appendChild(p2);
       form.appendChild(text);
       this.root.appendChild(form);
@@ -414,9 +420,9 @@ require('./style.css');
       addClass(text,this.options.FORM_TEXT_CLASS);
 
       this.form = {
-        form:form,
-        selectFile:p2,
-        text:text
+        form: form,
+        selectFile: p2,
+        text: text
       };
 
       return this;
@@ -436,6 +442,7 @@ require('./style.css');
 
       return this;
     },
+
     // 构建上传摁钮
     setupUploadButton:function() {
       var
@@ -448,6 +455,7 @@ require('./style.css');
 
       return this;
     },
+
     // 构建取消上传摁钮
     setupCancleUploadButton:function(){
       var
@@ -458,6 +466,7 @@ require('./style.css');
       this.cancleUploadButton = cancleUploadButton;
       return this;
     },
+
     // 构建文件信息
     setupFileInfoBox:function(){
       var
@@ -467,12 +476,14 @@ require('./style.css');
       this.fileInfoBox = fileInfoBox;
       return this;
     },
+
     // 弹窗
     setupPopup:function(){
       this.popup = cDiv({class:this.options.POPUP_CLASS});
       this.root.appendChild(this.popup);
       return this;
     },
+
     // 创建弹窗元素
     createPopupItem:function(file,errText){
       var
@@ -492,6 +503,7 @@ require('./style.css');
 
       return item;
     },
+
     //
     setupReturnButton:function(){
       var
@@ -503,15 +515,15 @@ require('./style.css');
       this.root.appendChild(returnButton);
       return this;
     },
+
     // 显示返回摁钮
     showReturnButton:function(){
       rmClass(this.returnButton,'hide');
-
       return this;
     },
+
     hideReturnButton:function(){
       addClass(this.returnButton,'hide');
-
       return this;
     },
 
@@ -527,6 +539,7 @@ require('./style.css');
         },0);
       }
     },
+
     // 准备上传
     readyToUpload:function(){
       this.checkAndShowUploadFileInfo();
@@ -537,9 +550,9 @@ require('./style.css');
       }
       this.showUploadButton();
     },
-    /*
-    * 检查，并构建文件信息的元素
-    */
+
+
+    // 检查，并构建文件信息的元素
     checkAndShowUploadFileInfo:function(){
       var
       fileLines = [],
@@ -558,19 +571,11 @@ require('./style.css');
       // 这里检测文件并创建显示文件的容器容器
       for (; i < len; i+=1) {
         var file = this.files[i];
-        // var name = file.name,type = file.type,size = file.size;
-
         var error = false;
-        if(!this.checkAllowFileSize(file)) {
-          error = true;
-        }
-        if(!this.checkAllowFileExtension(file)) {
-          error = true;
-        }
-        if(!this.checkAllowFileType(file)) {
-          error = true;
-        }
 
+        if(!this.checkAllowFileSize(file)) error = true;
+        if(!this.checkAllowFileExtension(file)) error = true;
+        if(!this.checkAllowFileType(file)) error = true;
         if(!error) {
           var file_line = this.createFileLine(file);
           file.fileLine = file_line;
@@ -578,19 +583,6 @@ require('./style.css');
           this.ready_files.push(file);
         }
       }
-
-      // 对不符合的文件提醒
-      // if(notallowtype.length > 0) {
-      //
-      // }
-      //
-      // if(notallowextension.length > 0){
-      //
-      // }
-      //
-      // if(oversize.length > 0){
-      //
-      // }
 
       // 没有上传条件的文件
       // 且当前未有文件上传
@@ -652,10 +644,12 @@ require('./style.css');
         }
       })
     },
+
     // 恩。目前并没有用到。
     uploadComplete:function(){
 
     },
+
     allUploadComplete:function(cb) {
       if(isFunction(cb)){
         cb();
@@ -670,6 +664,7 @@ require('./style.css');
       success(json);
       this.fileSaveSuccess(file);
     },
+
     /*
     * @dec: 创建文件信息行
     * @param: file 文件元素
@@ -683,7 +678,8 @@ require('./style.css');
       fileType = cDiv({class:this.options.FILE_TYPE_CLASS}),
       fileUploadProgress = cDiv({class:this.options.FILE_UPLOAD_PROGRESS_CLASS}),
       fileUploadPrpgressValue = cDiv({class:this.options.FILE_UPLOAD_PROGRESS_VALUE_CLASS}),
-      fileUploadPrpgressValueNumber = cDiv({class:this.options.FILE_UPLOAD_PROGRESS_VALUE_NUMBER_CLASS}),
+      fileUploadPrpgressValueNumber
+        = cDiv({class:this.options.FILE_UPLOAD_PROGRESS_VALUE_NUMBER_CLASS}),
       // 文本
       fnm = cText(this.options.FILE_NAME_TEXT+'  '+file.name),
       fsz = cText(this.options.FILE_SIZE_TEXT+' '+fileSizeTrans(file.size)),
@@ -694,37 +690,45 @@ require('./style.css');
       fileUploadProgress.appendChild(fileUploadPrpgressValue);
       fileUploadProgress.appendChild(fileUploadPrpgressValueNumber);
 
-      fileLine.appendChild(fileName);fileLine.appendChild(fileSize);fileLine.appendChild(fileType);
-      fileName.appendChild(fnm); fileType.appendChild(fty); fileSize.appendChild(fsz);
+      fileLine.appendChild(fileName);
+      fileLine.appendChild(fileSize);
+      fileLine.appendChild(fileType);
+
+      fileName.appendChild(fnm);
+      fileType.appendChild(fty);
+      fileSize.appendChild(fsz);
 
       if(this.options.ALLOW_UPLOAD_PROGRESS) {
         fileLine.appendChild(fileUploadProgress);
       }
 
       return {
-        fileLine:fileLine,
-        fileName:fileName,
-        fileSize:fileSize,
-        fileType:fileType,
-        fileUploadProgress,fileUploadProgress,
-        fileUploadPrpgressValue:fileUploadPrpgressValue,
-        fileUploadPrpgressValueNumber:fileUploadPrpgressValueNumber,
-        fileUploadPrpgressValueNumberText:pv,
+        fileLine: fileLine,
+        fileName: fileName,
+        fileSize: fileSize,
+        fileType: fileType,
+        fileUploadProgress: fileUploadProgress,
+        fileUploadPrpgressValue: fileUploadPrpgressValue,
+        fileUploadPrpgressValueNumber: fileUploadPrpgressValueNumber,
+        fileUploadPrpgressValueNumberText: pv,
       }
     },
+
     // 将文件信息的节点添加进list节点
     createFileList:function(fileLines){
       var
-      fileList = cDiv({class:this.options.FILE_LIST_CLASS});
+      fileList = cDiv({ class:this.options.FILE_LIST_CLASS });
       for (var i = 0,len = fileLines.length; i < len; i+=1) {
         fileList.appendChild(fileLines[i].fileLine);
       }
       return fileList;
     },
+
     // 清除所有的 list节点
     removeFileList:function(){
         this.fileInfoBox.innerHTML = '';
     },
+
     /*
     * @dec 创建ajax对象
     * @param data{file} 传入的文件
@@ -792,15 +796,14 @@ require('./style.css');
 
     // 绑定拖拽
     bindDrag:function(){
-      if(!this.options.ALLOW_DRAG) {
-        return this;
-      }
+      if(!this.options.ALLOW_DRAG) return this;
 
       this
-      .on(this.form.form,'drag dragstart dragend dragover dragenter dragleave drop',this.dragStartHandler)
-      .on(this.form.form,'dragstart dragover dragenter',this.dragOverHandler)
-      .on(this.form.form,'dragleave dragexit dragend drop',this.dragStopHandler)
-      .on(this.form.form,'drop',this.dropHandler);
+      .on(this.form.form, 'drag dragstart dragend dragover dragenter dragleave drop',
+        this.dragStartHandler)
+      .on(this.form.form, 'dragstart dragover dragenter', this.dragOverHandler)
+      .on(this.form.form, 'dragleave dragexit dragend drop', this.dragStopHandler)
+      .on(this.form.form, 'drop', this.dropHandler);
 
       return this;
     },
@@ -849,11 +852,13 @@ require('./style.css');
         this.showWaitToUploadView();
       }
     },
+
     // 拖拽界面
     showDragOverView:function(){
       addClass(this.form.text,'hide');
       this.showDragOver();
     },
+
     // 准备上传界面
     showReadyToUploadView:function(){
       // this.showUploadButton();
@@ -946,6 +951,7 @@ require('./style.css');
       this.clearUploadInfo();
       this.showWaitToUploadView();
     },
+
     // 清除所有的上传信息
     clearUploadInfo:function(){
       // 清空文件和设置
@@ -954,6 +960,7 @@ require('./style.css');
       this.last_files_length = 0;
       this.uploaded_file_length = 0;
     },
+
     // 显示文件的报错信息
     showPopup:function(file,err){
       var
@@ -968,13 +975,15 @@ require('./style.css');
         }, self.options.POPUP_TIME_OUT);
       }
     },
+
     // 检测文件信息
     checkAllowFileSize:function(file){
       var size = file.size;
       if(size < this.options.ALLOW_FILE_SIZE) {
         return true;
       } else {
-        var err = this.options.FILE_SIZE_ERR + size + '(请上传小于:'+fileSizeTrans(this.options.ALLOW_FILE_SIZE)+'的文件)';
+        var err = this.options.FILE_SIZE_ERR
+          + size + '(请上传小于:'+fileSizeTrans(this.options.ALLOW_FILE_SIZE)+'的文件)';
         this.showPopup(file,err);
         console.error(err);
         return false;
@@ -986,7 +995,8 @@ require('./style.css');
       if(this.options.ALLOW_FILE_EXTENSION.join('').indexOf(extension) > -1) {
         return true;
       } else {
-        var err = this.options.FILE_EXTENSION_ERR+extension + '(允许的文件后缀为' + this.options.ALLOW_FILE_EXTENSION.join(' ') + ')';
+        var err = this.options.FILE_EXTENSION_ERR+extension
+          + '(允许的文件后缀为' + this.options.ALLOW_FILE_EXTENSION.join(' ') + ')';
         this.showPopup(file,err);
         console.error(err);
         return false;
@@ -998,7 +1008,8 @@ require('./style.css');
       if(this.options.ALLOW_FILE_TYPE.join('').indexOf(type.split('/')[0]) > -1) {
         return true;
       } else {
-        var err = this.options.FILE_TYPE_ERR + type + '(允许的文件类型为' + this.options.ALLOW_FILE_TYPE.join(' ') + ')';
+        var err = this.options.FILE_TYPE_ERR
+          + type + '(允许的文件类型为' + this.options.ALLOW_FILE_TYPE.join(' ') + ')';
         this.showPopup(file,err);
         console.error(err);
         return false;
@@ -1016,8 +1027,10 @@ require('./style.css');
     fileUploadFail:function(file){
       var self = this;
       setTimeout(function () {
-        file.fileLine.fileUploadPrpgressValueNumberText.nodeValue = self.options.FILE_UPLOAD_VALUENUMBER_FAIL_TEXT;
-        addClass(file.fileLine.fileUploadPrpgressValueNumber,self.options.FILE_UPLOAD_VALUENUMBER_FAIL_CLASS);
+        file.fileLine.fileUploadPrpgressValueNumberText.nodeValue
+          = self.options.FILE_UPLOAD_VALUENUMBER_FAIL_TEXT;
+        addClass(file.fileLine.fileUploadPrpgressValueNumber,
+          self.options.FILE_UPLOAD_VALUENUMBER_FAIL_CLASS);
       }, 500);
 
       setTimeout(function(){
@@ -1027,9 +1040,12 @@ require('./style.css');
 
     fileUploadSuccess:function(fileLine) {
       var self = this;
+
       setTimeout(function () {
-        fileLine.fileUploadPrpgressValueNumberText.nodeValue = self.options.FILE_UPLOAD_VALUENUMBER_SUCCESS_TEXT;
-        addClass(fileLine.fileUploadPrpgressValueNumber,self.options.FILE_UPLOAD_VALUENUMBER_SUCCESS_CLASS);
+        fileLine.fileUploadPrpgressValueNumberText.nodeValue
+          = self.options.FILE_UPLOAD_VALUENUMBER_SUCCESS_TEXT;
+        addClass(fileLine.fileUploadPrpgressValueNumber,
+          self.options.FILE_UPLOAD_VALUENUMBER_SUCCESS_CLASS);
       }, 500);
 
       setTimeout(function () {
@@ -1039,14 +1055,15 @@ require('./style.css');
 
     fileSaveSuccess:function(file){
       var self = this;
+
       setTimeout(function () {
-        file.fileLine.fileUploadPrpgressValueNumberText.nodeValue = self.options.FILE_UPLOAD_SAVE_SUCCESS_TEXT;
+        file.fileLine.fileUploadPrpgressValueNumberText.nodeValue
+          = self.options.FILE_UPLOAD_SAVE_SUCCESS_TEXT;
       }, 1000);
     },
 
     bindReturnButton:function(){
       this.on(this.returnButton,'click',this.returnButtonHandler);
-
       return this;
     },
 
